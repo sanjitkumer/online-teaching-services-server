@@ -34,7 +34,6 @@ async function run(){
             res.send(service);
         });
 
-
         //orders api
         app.get('/reviews', async(req, res) => {
             // console.log(req,query.email);
@@ -49,10 +48,22 @@ async function run(){
             res.send(reviews);
         })
 
-
         app.post('/reviews', async(req, res) =>{
             const review = req.body;
             const result = await reviewCollection.insertOne(review);
+            res.send(result);
+        })
+
+        app.patch('/reviews/:id', async(req, res) => {
+            const id = req.params.id;
+            const status = req.body.status
+            const query = {_id: ObjectId(id) }
+            const updateDoc = {
+                $set:{
+                    status: status
+                }
+            }
+            const result = await orderCollection.updateOne(query, updateDoc)
             res.send(result);
         })
 
