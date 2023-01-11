@@ -104,16 +104,10 @@ async function run(){
             const result = await reviewCollection.deleteOne(query);
             res.send(result);
         })
-
-
-
-
-
     }
     finally{
 
     }
-
 }
 
 run().catch(err => console.error(err));
